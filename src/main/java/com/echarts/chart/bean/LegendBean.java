@@ -19,6 +19,11 @@ public class LegendBean {
 	public LegendBean() {
 
 	}
+
+	public LegendBean(List<String> data) {
+		this.data = data;
+	}
+
 	private String top; //水平安放位置，默认为全图居中，可选为：'center' | 'left' | 'right' | {number}（x坐标，单位px）
 	private String left; //垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | {number}（y坐标，单位px）
 	private String orient; //布局方式，默认为水平布局，可选为：'horizontal' | 'vertical'

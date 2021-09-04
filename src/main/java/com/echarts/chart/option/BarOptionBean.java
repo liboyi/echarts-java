@@ -1,11 +1,10 @@
 package com.echarts.chart.option;
 
-import java.util.List;
-
 import com.echarts.chart.bean.*;
-import com.exception.chart.bean.*;
 import com.echarts.chart.bean.series.ChartsBarSeriesBean;
 import lombok.Data;
+
+import java.util.List;
 
 
 /**

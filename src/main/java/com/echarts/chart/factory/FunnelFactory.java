@@ -5,7 +5,6 @@ import com.echarts.chart.bean.*;
 import com.echarts.chart.bean.series.ChartsFunnelSeriesBean;
 import com.echarts.chart.option.FunnelOptionBean;
 import com.echarts.chart.request.FunnelChartRequest;
-import com.exception.chart.bean.*;
 
 import java.util.ArrayList;
 import java.util.List;

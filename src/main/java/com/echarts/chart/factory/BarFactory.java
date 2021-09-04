@@ -31,11 +31,7 @@ public class BarFactory extends BaseFactory{
      * @return Object
      */
     public static Object createBar(BarChartRequest barChartRequest){
-        String trigger = "axis";
-        String x = "center";
-        String y = "top";
-        String unit = Optional.ofNullable(barChartRequest.getUnit()).orElse("");
-        String formatter = "{value}" + unit;
+        String formatter = StringUtils.hasLength(barChartRequest.getUnit()) ? "{value}" + barChartRequest.getUnit() : "{value}";
         List<ChartsBarSeriesBean> series = new ArrayList<>();
         //拿到图例
         List<String> legend = new ArrayList<>();
@@ -55,12 +51,10 @@ public class BarFactory extends BaseFactory{
         }
         BarOptionBean option = new BarOptionBean();
         //设置标题
-        ChartsTitleBean title = buildTitle(barChartRequest.getTitle(), null, "left", "top", null);
+        ChartsTitleBean title = getChartsTitleBean(barChartRequest);
         option.setTitle(title);
         //设置工具提示
-        ToolTipBean tooltip = new ToolTipBean();
-        tooltip.setTrigger(trigger);
-        option.setTooltip(tooltip);
+        option.setTooltip(new ToolTipBean());
         //设置工具栏
         List<String> type = Arrays.asList("bar", "line");
         Feature feature = getFeature(true, true, true, true,
@@ -69,7 +63,7 @@ public class BarFactory extends BaseFactory{
         toolbox.setFeature(feature);
         option.setToolbox(toolbox);
         //设置图例
-        LegendBean legendBean = LegendBean.builder().left(x).top(y).data(legend).build();
+        LegendBean legendBean = getLegendBean(barChartRequest, legend);
         option.setLegend(legendBean);
         //设置x轴
         option.setXAxis(buildXAis(barChartRequest.getXAxisName(),barChartRequest.getXData()));
@@ -82,6 +76,18 @@ public class BarFactory extends BaseFactory{
         //数据
         option.setSeries(series);
         return JSONObject.toJSON(option);
+    }
+
+    /**
+     *  getLegendBean
+     * @param barChartRequest barChartRequest
+     * @param legend legend
+     * @return LegendBean
+     */
+    private static LegendBean getLegendBean(BarChartRequest barChartRequest, List<String> legend) {
+        String leftOfLegend = Optional.ofNullable(barChartRequest.getLeftOfLegend()).orElse("center");
+        String topOfLegend = Optional.ofNullable(barChartRequest.getTopOfLegend()).orElse("top");
+        return LegendBean.builder().left(leftOfLegend).top(topOfLegend).data(legend).build();
     }
 
     /**
@@ -121,7 +127,7 @@ public class BarFactory extends BaseFactory{
             }
         }
         //设置标题
-        ChartsTitleBean title = buildTitle(barChartRequest.getTitle(),null, "left", "top", barChartRequest.getFontSize());
+        ChartsTitleBean title = getChartsTitleBean(barChartRequest);
         option.setTitle(title);
         //设置工具提示
         option.setTooltip(new ToolTipBean());
@@ -132,8 +138,7 @@ public class BarFactory extends BaseFactory{
         toolbox.setFeature(feature);
         option.setToolbox(toolbox);
         //设置图例
-        LegendBean legendBean =  LegendBean.builder().left("center").top("top").data(legend).build();
-        option.setLegend(legendBean);
+        option.setLegend(getLegendBean(barChartRequest, legend));
         //设置x轴
         option.setXAxis(buildXAis(barChartRequest.getXAxisName(),barChartRequest.getXData()));
         //设置y轴
@@ -146,6 +151,18 @@ public class BarFactory extends BaseFactory{
         //数据
         option.setSeries(series);
         return JSONObject.toJSON(option);
+    }
+
+    /**
+     * getChartsTitleBean
+     * @param barChartRequest barChartRequest
+     * @return ChartsTitleBean
+     */
+    private static ChartsTitleBean getChartsTitleBean(BarChartRequest barChartRequest) {
+        String left = Optional.ofNullable(barChartRequest.getLeft()).orElse("left");
+        String top = Optional.ofNullable(barChartRequest.getTop()).orElse("top");
+        return buildTitle(barChartRequest.getTitle(), barChartRequest.getSubTitle(), left, top,
+                barChartRequest.getFontSize());
     }
 
 }

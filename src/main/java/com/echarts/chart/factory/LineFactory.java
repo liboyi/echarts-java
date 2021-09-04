@@ -5,8 +5,6 @@ import com.echarts.chart.bean.*;
 import com.echarts.chart.bean.series.ChartsLineSeriesBean;
 import com.echarts.chart.option.LineOptionBean;
 import com.echarts.chart.request.LineChartRequest;
-import com.echarts.chart.bean.ChartsToolBoxBean;
-import com.exception.chart.bean.*;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -85,9 +83,7 @@ public class LineFactory extends BaseFactory{
         toolbox.setFeature(feature);
         option.setToolbox(toolbox);
         //设置图例
-        LegendBean legendBean = new LegendBean();
-        legendBean.setData(legendData);
-        option.setLegend(legendBean);
+        option.setLegend(new LegendBean(legendData));
         //设置x轴
         option.setXAxis(buildXAis(lineChartRequest.getXAxisName(),lineChartRequest.getXData()));
         //设置y轴

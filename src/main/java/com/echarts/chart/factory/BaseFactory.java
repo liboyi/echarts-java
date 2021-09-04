@@ -1,7 +1,6 @@
 package com.echarts.chart.factory;
 
 import com.echarts.chart.bean.*;
-import com.exception.chart.bean.*;
 
 import java.util.List;
 

@@ -2,9 +2,8 @@ package com.echarts.chart.factory;
 
 import com.alibaba.fastjson.JSONObject;
 import com.echarts.chart.bean.*;
-import com.echarts.chart.option.PieOptionBean;
 import com.echarts.chart.bean.series.ChartsPieSeriesBean;
-import com.exception.chart.bean.*;
+import com.echarts.chart.option.PieOptionBean;
 import com.echarts.chart.request.PieChartRequest;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;

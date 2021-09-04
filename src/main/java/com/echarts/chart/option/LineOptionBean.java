@@ -2,7 +2,6 @@ package com.echarts.chart.option;
 
 import com.echarts.chart.bean.*;
 import com.echarts.chart.bean.series.ChartsLineSeriesBean;
-import com.exception.chart.bean.*;
 import lombok.Data;
 
 import java.util.List;
